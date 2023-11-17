@@ -1,0 +1,43 @@
+# INSTALL REQUIREMENTS:
+#1  pip install -U pip setuptools wheel pip-tools --timeout 60
+#2  pip-compile --upgrade requirements.in -o requirements.txt
+#3  pip-sync requirements.txt --pip-args "--retries 10 --timeout 60"
+#   or pip install -r requirements.txt --retries 10 --timeout 60
+
+# FORMAT CODE:
+# black .
+
+
+## DB
+psycopg[binary]
+
+## Django
+django
+django-extensions
+channels[daphne]
+
+## Other
+requests
+python-dotenv
+
+## Datascience
+numpy
+scikit-learn
+joblib
+
+## Monitoring
+sentry-sdk
+
+## Brokers, servers
+redis
+hiredis
+gunicorn
+uvicorn
+channels-redis
+
+## Code
+ipython
+black
+
+## Tests
+coverage
