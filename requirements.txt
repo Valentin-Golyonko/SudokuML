@@ -10,6 +10,7 @@ asgiref==3.7.2
     #   channels-redis
     #   daphne
     #   django
+    #   django-cors-headers
 asttokens==2.4.1
     # via stack-data
 attrs==23.1.0
@@ -23,7 +24,7 @@ automat==22.10.0
     # via twisted
 black==23.11.0
     # via -r requirements.in
-certifi==2023.7.22
+certifi==2023.11.17
     # via
     #   requests
     #   sentry-sdk
@@ -58,7 +59,10 @@ django==4.2.7
     # via
     #   -r requirements.in
     #   channels
+    #   django-cors-headers
     #   django-extensions
+django-cors-headers==4.3.1
+    # via -r requirements.in
 django-extensions==3.2.3
     # via -r requirements.in
 executing==2.0.1

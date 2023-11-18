@@ -15,6 +15,7 @@ psycopg[binary]
 django
 django-extensions
 channels[daphne]
+django-cors-headers
 
 ## Other
 requests
