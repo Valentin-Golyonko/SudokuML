@@ -1,7 +1,3 @@
-"""
-# from channels.db import database_sync_to_async
-# from rest_framework_simplejwt.authentication import JWTAuthentication
-"""
 import json
 import logging
 
@@ -44,27 +40,36 @@ class ChatConsumer(AsyncWebsocketConsumer):
         )
 
     @staticmethod
-    async def send_ws_msg(
-        message: str,
-    ) -> None:
+    async def send_ws_msg(position: str, value: int, status: int) -> None:
+        """
+        status == 0 -> zero field
+        status == 1 -> base field
+        status == 2 -> wip field
+        status == 3 -> field solved
+        """
+
         # Send message to room group
         channel_layer = get_channel_layer()
         await channel_layer.group_send(
             "default",
             {
                 "type": "chat.message",
-                "message": message,
+                "position": position,
+                "value": value,
+                "status": status,
             },
         )
-        logger.debug(f"send_ws_msg(): done; {message = }")
+        # logger.debug(f"send_ws_msg(): done; {position = }, {value = }")
 
     async def chat_message(self, event: dict):
         # Send message to WebSocket
         await self.send(
             text_data=json.dumps(
                 {
-                    "message": event.get("message"),
+                    "position": event.get("position"),
+                    "value": event.get("value"),
+                    "status": event.get("status"),
                 }
             )
         )
-        logger.debug(f"chat_message(): send done; {event = }")
+        # logger.debug(f"chat_message(): send done; {event = }")

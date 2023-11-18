@@ -22,7 +22,7 @@ class SudokuVL:
                 tmp_data = {
                     f"p{line_index}{item_index}": {
                         "value": int(value),
-                        "base": bool(value != 0),
+                        "base": 1 if value != 0 else 0,
                     }
                 }
 
