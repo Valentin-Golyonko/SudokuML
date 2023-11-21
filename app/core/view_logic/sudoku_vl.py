@@ -6,7 +6,7 @@ from app.core.sudoku_data.sudoku_data import SudokuData
 class SudokuVL:
     @staticmethod
     async def get_sudoku_game():
-        np_board = np.reshape(a=SudokuData.SUDOKU_1, newshape=(9, 9))
+        np_board = np.reshape(a=SudokuData.DEFAULT, newshape=(9, 9))
 
         out_data = {}
 

@@ -18,7 +18,7 @@ class SolveVL:
         logger.debug(f"Sudoku solver started...")
         time_start = perf_counter()
 
-        sudoku_board = SudokuData.SUDOKU_1
+        sudoku_board = SudokuData.DEFAULT
 
         steps = await cls.solve_loop(sudoku_board)
 
@@ -33,8 +33,13 @@ class SolveVL:
     async def solve_loop(cls, sudoku_board: list[int]) -> int:
         np_board: np.ndarray = np.reshape(a=sudoku_board, newshape=(9, 9))
 
-        # sudoku_board_2 = [[i, list(range(10))] for i in sudoku_board]
-        # sudoku_board_3 = [list(range(10)) for i in sudoku_board]
+        """
+        sudoku_board_2d = [list(range(10)) for i in sudoku_board]
+        np_board_3d = np.reshape(a=sudoku_board_2d, newshape=(9, 9, 10))
+        
+        sudoku_board_3d = [[[i, *[0 for _ in range(9)]], list(range(10))] for i in sudoku_board]
+        np_board_4d = np.reshape(a=sudoku_board_3d, newshape=(9, 9, 2, 10))
+        """
 
         """
         np_board[:,2] ->
@@ -57,6 +62,15 @@ class SolveVL:
                    [0, 4, 7]])
         """
 
+        remaining_values = {}
+        for line_index, line in enumerate(np_board):
+            for item_index, value in enumerate(line):
+                position = f"p{line_index}{item_index}"
+                if value != 0:
+                    remaining_values[position] = []
+                else:
+                    remaining_values[position] = [i for i in range(10)]
+
         zeros = len([i for i in sudoku_board if i == 0])
         for step in range(zeros):
             if np_board.all():
@@ -67,7 +81,7 @@ class SolveVL:
                     if value != 0:
                         continue
 
-                    await cls.solver(np_board, line_index, item_index)
+                    await cls.solver(np_board, line_index, item_index, remaining_values)
 
         return zeros
 
@@ -77,6 +91,7 @@ class SolveVL:
         np_board: np.ndarray,
         line_index: int,
         item_index: int,
+        remaining_values: dict[str, list[int]],
     ) -> None:
         """sudoku solver"""
 
@@ -97,12 +112,17 @@ class SolveVL:
         if len(allowed_values) == 1:
             allowed_value = allowed_values[0]
             np_board[line_index, item_index] = allowed_value
+            remaining_values[position] = []
             await ChatConsumer.send_ws_msg(
                 position=position,
                 value=allowed_value,
                 status=CoreConstants.STATUS_SOLVED,
             )
             return None
+
+        neighbor_values = cls.get_neighbor_values(
+            np_board, line_index, item_index, remaining_values
+        )
 
         h_cube_2_values_clean, h_cube_3_values_clean = cls.get_horizontal_cubes_values(
             np_board, line_index, item_index
@@ -113,6 +133,16 @@ class SolveVL:
         )
 
         for av in allowed_values:
+            if av not in neighbor_values:
+                np_board[line_index, item_index] = av
+                remaining_values[position] = []
+                await ChatConsumer.send_ws_msg(
+                    position=position,
+                    value=av,
+                    status=CoreConstants.STATUS_SOLVED,
+                )
+                return None
+
             av_in_h_cube_2 = av in h_cube_2_values_clean
             av_in_h_cube_3 = av in h_cube_3_values_clean
 
@@ -125,6 +155,7 @@ class SolveVL:
 
             if av_in_vh_cubes:
                 np_board[line_index, item_index] = av
+                remaining_values[position] = []
                 await ChatConsumer.send_ws_msg(
                     position=position,
                     value=av,
@@ -137,6 +168,8 @@ class SolveVL:
                 value=av,
                 status=CoreConstants.STATUS_WIP,
             )
+
+        remaining_values[position] = allowed_values
 
         await ChatConsumer.send_ws_msg(
             position=position,
@@ -275,3 +308,37 @@ class SolveVL:
         cube_3_values_clean = sorted([i for i in cube_3_values.tolist() if i != 0])
 
         return cube_2_values_clean, cube_3_values_clean
+
+    @staticmethod
+    def get_neighbor_values(
+        np_board: np.ndarray,
+        line_index: int,
+        item_index: int,
+        remaining_values: dict[str, list[int]],
+    ) -> set[int]:
+        """tba"""
+
+        if line_index in range(0, 3):
+            x = list(range(0, 3))
+        elif line_index in range(3, 6):
+            x = list(range(3, 6))
+        else:
+            x = list(range(6, 9))
+
+        if item_index in range(0, 3):
+            y = list(range(0, 3))
+        elif item_index in range(3, 6):
+            y = list(range(3, 6))
+        else:
+            y = list(range(6, 9))
+
+        neighbor_values = set()
+        for x_pos in x:
+            for y_pos in y:
+                if x_pos == line_index and y_pos == item_index:
+                    continue
+
+                rv = remaining_values.get(f"p{x_pos}{y_pos}", [])
+                neighbor_values.update(rv)
+
+        return neighbor_values
