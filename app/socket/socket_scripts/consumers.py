@@ -41,13 +41,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     @staticmethod
     async def send_ws_msg(position: str, value: int, status: int) -> None:
-        """
-        status == 0 -> zero field
-        status == 1 -> base field
-        status == 2 -> wip field
-        status == 3 -> field solved
-        """
-
         # Send message to room group
         channel_layer = get_channel_layer()
         await channel_layer.group_send(
