@@ -13,7 +13,7 @@ asgiref==3.7.2
     #   django-cors-headers
 asttokens==2.4.1
     # via stack-data
-attrs==23.1.0
+attrs==23.2.0
     # via
     #   automat
     #   service-identity
@@ -22,7 +22,7 @@ autobahn==23.6.2
     # via daphne
 automat==22.10.0
     # via twisted
-black==23.11.0
+black==23.12.1
     # via -r requirements.in
 certifi==2023.11.17
     # via
@@ -44,9 +44,9 @@ click==8.1.7
     #   uvicorn
 constantly==23.10.4
     # via twisted
-coverage==7.3.2
+coverage==7.4.0
     # via -r requirements.in
-cryptography==41.0.5
+cryptography==41.0.7
     # via
     #   autobahn
     #   pyopenssl
@@ -55,7 +55,7 @@ daphne==4.0.0
     # via channels
 decorator==5.1.1
     # via ipython
-django==4.2.7
+django==4.2.9
     # via
     #   -r requirements.in
     #   channels
@@ -71,20 +71,20 @@ gunicorn==21.2.0
     # via -r requirements.in
 h11==0.14.0
     # via uvicorn
-hiredis==2.2.3
+hiredis==2.3.2
     # via -r requirements.in
 hyperlink==21.0.0
     # via
     #   autobahn
     #   twisted
-idna==3.4
+idna==3.6
     # via
     #   hyperlink
     #   requests
     #   twisted
 incremental==22.10.0
     # via twisted
-ipython==8.17.2
+ipython==8.19.0
     # via -r requirements.in
 jedi==0.19.1
     # via ipython
@@ -98,7 +98,7 @@ msgpack==1.0.7
     # via channels-redis
 mypy-extensions==1.0.0
     # via black
-numpy==1.26.2
+numpy==1.26.3
     # via
     #   -r requirements.in
     #   scikit-learn
@@ -109,23 +109,23 @@ packaging==23.2
     #   gunicorn
 parso==0.8.3
     # via jedi
-pathspec==0.11.2
+pathspec==0.12.1
     # via black
-pexpect==4.8.0
+pexpect==4.9.0
     # via ipython
-platformdirs==4.0.0
+platformdirs==4.1.0
     # via black
-prompt-toolkit==3.0.41
+prompt-toolkit==3.0.43
     # via ipython
-psycopg[binary]==3.1.13
+psycopg[binary]==3.1.16
     # via -r requirements.in
-psycopg-binary==3.1.13
+psycopg-binary==3.1.16
     # via psycopg
 ptyprocess==0.7.0
     # via pexpect
 pure-eval==0.2.2
     # via stack-data
-pyasn1==0.5.0
+pyasn1==0.5.1
     # via
     #   pyasn1-modules
     #   service-identity
@@ -133,7 +133,7 @@ pyasn1-modules==0.3.0
     # via service-identity
 pycparser==2.21
     # via cffi
-pygments==2.16.1
+pygments==2.17.2
     # via ipython
 pyopenssl==23.3.0
     # via twisted
@@ -147,9 +147,9 @@ requests==2.31.0
     # via -r requirements.in
 scikit-learn==1.3.2
     # via -r requirements.in
-scipy==1.11.3
+scipy==1.11.4
     # via scikit-learn
-sentry-sdk==1.35.0
+sentry-sdk==1.39.1
     # via -r requirements.in
 service-identity==23.1.0
     # via twisted
@@ -163,7 +163,7 @@ stack-data==0.6.3
     # via ipython
 threadpoolctl==3.2.0
     # via scikit-learn
-traitlets==5.13.0
+traitlets==5.14.1
     # via
     #   ipython
     #   matplotlib-inline
@@ -173,7 +173,7 @@ twisted[tls]==23.10.0
     #   twisted
 txaio==23.1.1
     # via autobahn
-typing-extensions==4.8.0
+typing-extensions==4.9.0
     # via
     #   psycopg
     #   twisted
@@ -181,9 +181,9 @@ urllib3==2.1.0
     # via
     #   requests
     #   sentry-sdk
-uvicorn==0.24.0.post1
+uvicorn==0.25.0
     # via -r requirements.in
-wcwidth==0.2.10
+wcwidth==0.2.12
     # via prompt-toolkit
 zope-interface==6.1
     # via twisted

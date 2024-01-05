@@ -12,7 +12,7 @@
 psycopg[binary]
 
 ## Django
-django
+django<5.0
 django-extensions
 channels[daphne]
 django-cors-headers
