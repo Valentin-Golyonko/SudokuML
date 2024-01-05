@@ -62,6 +62,7 @@ class SolveVL:
                    [0, 4, 7]])
         """
 
+        """create a dict that contains 0-9 ints possible for avery position."""
         remaining_values = {}
         for line_index, line in enumerate(np_board):
             for item_index, value in enumerate(line):
@@ -71,19 +72,26 @@ class SolveVL:
                 else:
                     remaining_values[position] = [i for i in range(10)]
 
-        zeros = len([i for i in sudoku_board if i == 0])
-        for step in range(zeros):
+        """main loop"""
+        zeros_count = len([i for i in sudoku_board if i == 0])
+        for step in range(zeros_count):
             if np_board.all():
+                """exit if solved == all positions filled."""
                 return step
 
             for line_index, line in enumerate(np_board):
                 for item_index, value in enumerate(line):
+                    """
+                    double loop for avery non zero position.
+                    from left (top) to right (top),
+                    from top to bottom.
+                    """
                     if value != 0:
                         continue
 
                     await cls.solver(np_board, line_index, item_index, remaining_values)
 
-        return zeros
+        return zeros_count
 
     @classmethod
     async def solver(
@@ -93,7 +101,10 @@ class SolveVL:
         item_index: int,
         remaining_values: dict[str, list[int]],
     ) -> None:
-        """sudoku solver"""
+        """
+        sudoku solver.
+        modifies np_board in place.
+        """
 
         position = f"p{line_index}{item_index}"
         # if position == "p05":
@@ -124,13 +135,13 @@ class SolveVL:
             np_board, line_index, item_index, remaining_values
         )
 
-        h_cube_2_values_clean, h_cube_3_values_clean = cls.get_horizontal_cubes_values(
-            np_board, line_index, item_index
-        )
-
-        v_cube_2_values_clean, v_cube_3_values_clean = cls.get_vertical_cubes_values(
-            np_board, line_index, item_index
-        )
+        # h_cube_2_values_clean, h_cube_3_values_clean = cls.get_horizontal_cubes_values(
+        #     np_board, line_index, item_index
+        # )
+        #
+        # v_cube_2_values_clean, v_cube_3_values_clean = cls.get_vertical_cubes_values(
+        #     np_board, line_index, item_index
+        # )
 
         for av in allowed_values:
             if av not in neighbor_values:
@@ -143,25 +154,25 @@ class SolveVL:
                 )
                 return None
 
-            av_in_h_cube_2 = av in h_cube_2_values_clean
-            av_in_h_cube_3 = av in h_cube_3_values_clean
-
-            av_in_v_cube_2 = av in v_cube_2_values_clean
-            av_in_v_cube_3 = av in v_cube_3_values_clean
-
-            av_in_vh_cubes = all(
-                [av_in_h_cube_2, av_in_h_cube_3, av_in_v_cube_2, av_in_v_cube_3]
-            )
-
-            if av_in_vh_cubes:
-                np_board[line_index, item_index] = av
-                remaining_values[position] = []
-                await ChatConsumer.send_ws_msg(
-                    position=position,
-                    value=av,
-                    status=CoreConstants.STATUS_SOLVED,
-                )
-                return None
+            # av_in_h_cube_2 = av in h_cube_2_values_clean
+            # av_in_h_cube_3 = av in h_cube_3_values_clean
+            #
+            # av_in_v_cube_2 = av in v_cube_2_values_clean
+            # av_in_v_cube_3 = av in v_cube_3_values_clean
+            #
+            # av_in_vh_cubes = all(
+            #     [av_in_h_cube_2, av_in_h_cube_3, av_in_v_cube_2, av_in_v_cube_3]
+            # )
+            #
+            # if av_in_vh_cubes:
+            #     np_board[line_index, item_index] = av
+            #     remaining_values[position] = []
+            #     await ChatConsumer.send_ws_msg(
+            #         position=position,
+            #         value=av,
+            #         status=CoreConstants.STATUS_SOLVED,
+            #     )
+            #     return None
 
             await ChatConsumer.send_ws_msg(
                 position=position,
