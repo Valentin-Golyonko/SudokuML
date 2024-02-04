@@ -6,5 +6,5 @@ urlpatterns = [
     path("api/v1/board/", include("app.board.urls")),
     path("api/v1/solver/", include("app.solver.urls")),
     #
-    path("admin/", admin.site.urls),
+    path("api/admin/", admin.site.urls),
 ]

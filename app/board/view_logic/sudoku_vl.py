@@ -1,12 +1,25 @@
+from random import choice
+
 import numpy as np
 
-from app.board.sudoku_data.sudoku_data import SudokuData
+from app.board.crud.crud_board import CRUDBoard
 
 
 class SudokuVL:
     @staticmethod
-    async def get_sudoku_game():
-        np_board = np.reshape(a=SudokuData.DEFAULT, newshape=(9, 9))
+    async def get_sudoku_game(difficulty: int) -> tuple[bool, dict, str]:
+
+        boards_ids = await CRUDBoard.boards_ids(difficulty)
+        if len(boards_ids) == 0:
+            return False, {}, "Can not get board."
+
+        board_id = choice(boards_ids)
+
+        board_obj = await CRUDBoard.get_board(board_id)
+        if board_obj is None:
+            return False, {}, "Can not get board."
+
+        np_board = np.reshape(a=board_obj.data, newshape=(9, 9))
 
         out_data = {}
 
@@ -28,4 +41,4 @@ class SudokuVL:
 
                 out_data.update(tmp_data)
 
-        return out_data
+        return True, out_data, ""

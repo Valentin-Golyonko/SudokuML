@@ -8,10 +8,15 @@ from app.board.view_logic.sudoku_vl import SudokuVL
 
 class SudokuView(View):
     async def get(self, request, *args, **kwargs):
-        game_data = await SudokuVL.get_sudoku_game()
+        is_ok, out_data, detail = await SudokuVL.get_sudoku_game(
+            kwargs.get("difficulty")
+        )
         return JsonResponse(
-            data={"data": game_data},
+            data={
+                "data": out_data,
+                "detail": detail,
+            },
             safe=True,
             json_dumps_params={"ensure_ascii": False},
-            status=HTTPStatus.OK,
+            status=HTTPStatus.OK if is_ok else HTTPStatus.BAD_REQUEST,
         )
