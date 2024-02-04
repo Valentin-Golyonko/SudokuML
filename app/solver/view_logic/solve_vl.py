@@ -13,6 +13,8 @@ logger = logging.getLogger(__name__)
 
 
 class SolveVL:
+    """"""
+
     @classmethod
     @time_it
     async def solve(cls) -> bool:
@@ -27,10 +29,7 @@ class SolveVL:
 
     @classmethod
     async def solve_loop(cls, sudoku_board: list[int]) -> int:
-        np_board: np.ndarray = np.reshape(
-            a=sudoku_board,
-            newshape=(9, 9),
-        )
+        np_board: np.ndarray = np.reshape(a=sudoku_board, newshape=(9, 9))
 
         """
         sudoku_board_2d = [list(range(10)) for i in sudoku_board]
