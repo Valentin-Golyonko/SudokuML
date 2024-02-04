@@ -1,0 +1,14 @@
+
+## Django
+#django-debug-toolbar
+
+## Tests
+#coverage
+#pytest
+#locust
+
+## Code
+black
+
+## Other
+#tblib
