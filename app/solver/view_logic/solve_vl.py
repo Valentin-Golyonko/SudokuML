@@ -1,6 +1,8 @@
 """"""
 
 import logging
+from datetime import timedelta
+from time import perf_counter
 
 import numpy as np
 
@@ -19,6 +21,7 @@ class SolveVL:
     @time_it
     async def solve(cls, board_id: int) -> tuple[bool, dict, str]:
         logger.debug(f"Sudoku solver started...")
+        time_start = perf_counter()
 
         board_obj = await CRUDBoard.get_board(board_id)
         if board_obj is None:
@@ -26,9 +29,14 @@ class SolveVL:
 
         steps = await cls.solve_loop(board_obj.data)
 
+        time_end = perf_counter()
         logger.info(f"Solved; {steps = :,}")
+        out_data = {
+            "steps": f"{steps:,}",
+            "solve_time": f"{timedelta(seconds=time_end - time_start)}",
+        }
 
-        return True, {}, ""
+        return True, out_data, ""
 
     @classmethod
     async def solve_loop(cls, sudoku_board: list[int]) -> int:

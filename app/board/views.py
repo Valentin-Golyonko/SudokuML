@@ -9,7 +9,8 @@ from app.board.view_logic.sudoku_vl import SudokuVL
 class SudokuView(View):
     async def get(self, request, *args, **kwargs):
         is_ok, out_data, detail = await SudokuVL.get_sudoku_game(
-            kwargs.get("difficulty")
+            kwargs.get("difficulty"),
+            kwargs.get("current"),
         )
         return JsonResponse(
             data={

@@ -27,12 +27,19 @@ class CRUDBoard:
 
     @staticmethod
     @sync_to_async
-    def boards_ids(difficulty: int) -> list[int]:
+    def boards_ids(
+        difficulty: int,
+        current_board_id: int,
+    ) -> list[int]:
         try:
             return list(
                 Board.objects.filter(
                     difficulty=difficulty,
-                ).values_list(
+                )
+                .exclude(
+                    id=current_board_id,
+                )
+                .values_list(
                     "id",
                     flat=True,
                 )

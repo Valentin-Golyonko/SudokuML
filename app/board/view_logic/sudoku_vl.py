@@ -7,9 +7,12 @@ from app.board.crud.crud_board import CRUDBoard
 
 class SudokuVL:
     @staticmethod
-    async def get_sudoku_game(difficulty: int) -> tuple[bool, dict, str]:
+    async def get_sudoku_game(
+        difficulty: int,
+        current_board_id: int,
+    ) -> tuple[bool, dict, str]:
 
-        boards_ids = await CRUDBoard.boards_ids(difficulty)
+        boards_ids = await CRUDBoard.boards_ids(difficulty, current_board_id)
         if len(boards_ids) == 0:
             return False, {}, "Can not get board."
 
