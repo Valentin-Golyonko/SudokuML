@@ -5,6 +5,11 @@ from app.board.constants import BoardConstants
 
 class Board(models.Model):
 
+    title = models.CharField(
+        max_length=20,
+        default="",
+    )
+
     data = models.JSONField(
         default=list,
     )

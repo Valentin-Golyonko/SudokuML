@@ -6,6 +6,7 @@ from app.board.models import Board
 @admin.register(Board)
 class BoardAdmin(admin.ModelAdmin):
     list_display = (
+        "title",
         "id",
         "difficulty",
     )
