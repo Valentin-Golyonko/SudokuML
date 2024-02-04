@@ -165,3 +165,7 @@ LOGGING = {
     },
 }
 """<- Logging settings"""
+
+"""sentry.io config ->"""
+USE_SENTRY = False
+"""< - sentry.io config"""

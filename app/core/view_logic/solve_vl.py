@@ -1,12 +1,11 @@
 """"""
 
 import logging
-from datetime import timedelta
-from time import perf_counter
 
 import numpy as np
 
 from app.core.constants import CoreConstants
+from app.core.scripts.utils import time_it
 from app.core.sudoku_data.sudoku_data import SudokuData
 from app.socket.socket_scripts.consumers import ChatConsumer
 
@@ -15,19 +14,15 @@ logger = logging.getLogger(__name__)
 
 class SolveVL:
     @classmethod
+    @time_it
     async def solve(cls) -> bool:
         logger.debug(f"Sudoku solver started...")
-        time_start = perf_counter()
 
         sudoku_board = SudokuData.DEFAULT
 
         steps = await cls.solve_loop(sudoku_board)
 
-        time_end = perf_counter()
-
-        logger.info(
-            f"Solved; {steps = :,}, time = {timedelta(seconds=time_end - time_start)}"
-        )
+        logger.info(f"Solved; {steps = :,}")
         return True
 
     @classmethod
