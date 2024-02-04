@@ -1,6 +1,6 @@
 import numpy as np
 
-from app.core.sudoku_data.sudoku_data import SudokuData
+from app.board.sudoku_data.sudoku_data import SudokuData
 
 
 class SudokuVL:

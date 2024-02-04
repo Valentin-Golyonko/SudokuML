@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     "django_extensions",
     #
     "app.core",
+    "app.board",
     "app.solver",
     "app.socket",
 ]

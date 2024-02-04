@@ -4,9 +4,9 @@ import logging
 
 import numpy as np
 
+from app.board.sudoku_data.sudoku_data import SudokuData
 from app.core.constants import CoreConstants
 from app.core.scripts.utils import time_it
-from app.core.sudoku_data.sudoku_data import SudokuData
 from app.socket.socket_scripts.consumers import ChatConsumer
 
 logger = logging.getLogger(__name__)
