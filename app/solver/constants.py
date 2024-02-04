@@ -1,0 +1,7 @@
+""""""
+
+
+class SolverConstants:
+    """SolverConstants"""
+
+    pass
