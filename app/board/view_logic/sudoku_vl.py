@@ -21,7 +21,12 @@ class SudokuVL:
 
         np_board = np.reshape(a=board_obj.data, newshape=(9, 9))
 
-        out_data = {}
+        board = {}
+
+        out_data = {
+            "board_id": board_id,
+            "board": board,
+        }
 
         for line_index, line in enumerate(np_board):
             for item_index, value in enumerate(line):
@@ -39,6 +44,6 @@ class SudokuVL:
                     }
                 }
 
-                out_data.update(tmp_data)
+                board.update(tmp_data)
 
         return True, out_data, ""

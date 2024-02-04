@@ -4,7 +4,7 @@ import logging
 
 import numpy as np
 
-from app.board.sudoku_data.sudoku_data import SudokuData
+from app.board.crud.crud_board import CRUDBoard
 from app.core.constants import CoreConstants
 from app.core.scripts.utils import time_it
 from app.socket.socket_scripts.consumers import ChatConsumer
@@ -17,15 +17,17 @@ class SolveVL:
 
     @classmethod
     @time_it
-    async def solve(cls) -> bool:
+    async def solve(cls, board_id: int) -> tuple[bool, dict, str]:
         logger.debug(f"Sudoku solver started...")
 
-        sudoku_board = SudokuData.DEFAULT
+        board_obj = await CRUDBoard.get_board(board_id)
+        if board_obj is None:
+            return False, {}, "Can not get board."
 
-        steps = await cls.solve_loop(sudoku_board)
+        steps = await cls.solve_loop(board_obj.data)
 
         logger.info(f"Solved; {steps = :,}")
-        return True
+        return True, {}, ""
 
     @classmethod
     async def solve_loop(cls, sudoku_board: list[int]) -> int:
