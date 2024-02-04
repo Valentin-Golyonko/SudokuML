@@ -96,11 +96,11 @@ class SolveVL:
 
     @classmethod
     async def solver(
-            cls,
-            np_board: np.ndarray,
-            line_index: int,
-            item_index: int,
-            remaining_values: dict[str, list[int]],
+        cls,
+        np_board: np.ndarray,
+        line_index: int,
+        item_index: int,
+        remaining_values: dict[str, list[int]],
     ) -> None:
         """
         sudoku solver.
@@ -192,9 +192,9 @@ class SolveVL:
 
     @staticmethod
     def get_cube_values(
-            np_board: np.ndarray,
-            line_index: int,
-            item_index: int,
+        np_board: np.ndarray,
+        line_index: int,
+        item_index: int,
     ) -> tuple[np.ndarray, list[int]]:
         """
         np_board[0:3,0:3] ->
@@ -232,9 +232,9 @@ class SolveVL:
 
     @staticmethod
     def get_vh_values(
-            np_board: np.ndarray,
-            line_index: int,
-            item_index: int,
+        np_board: np.ndarray,
+        line_index: int,
+        item_index: int,
     ) -> tuple[list[int], list[int]]:
         """
         np_board[:,2] ->
@@ -251,9 +251,9 @@ class SolveVL:
 
     @staticmethod
     def get_horizontal_cubes_values(
-            np_board: np.ndarray,
-            line_index: int,
-            item_index: int,
+        np_board: np.ndarray,
+        line_index: int,
+        item_index: int,
     ) -> tuple[list[int], list[int]]:
         """tba"""
 
@@ -287,9 +287,9 @@ class SolveVL:
 
     @staticmethod
     def get_vertical_cubes_values(
-            np_board: np.ndarray,
-            line_index: int,
-            item_index: int,
+        np_board: np.ndarray,
+        line_index: int,
+        item_index: int,
     ) -> tuple[list[int], list[int]]:
         """tba"""
 
@@ -323,10 +323,10 @@ class SolveVL:
 
     @staticmethod
     def get_neighbor_values(
-            np_board: np.ndarray,
-            line_index: int,
-            item_index: int,
-            remaining_values: dict[str, list[int]],
+        np_board: np.ndarray,
+        line_index: int,
+        item_index: int,
+        remaining_values: dict[str, list[int]],
     ) -> set[int]:
         """tba"""
 
