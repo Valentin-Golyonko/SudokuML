@@ -1,5 +1,4 @@
 class CoreConstants:
-
     """
     status == 0 -> zero field
     status == 1 -> base field
