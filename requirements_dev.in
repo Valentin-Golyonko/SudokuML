@@ -2,6 +2,11 @@
 ## Django
 #django-debug-toolbar
 
+## DataScience
+notebook
+matplotlib
+tensorflow
+
 ## Tests
 #coverage
 #pytest
@@ -9,6 +14,7 @@
 
 ## Code
 black
+black[jupyter]
 
 ## Other
 #tblib

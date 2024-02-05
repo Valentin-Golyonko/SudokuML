@@ -25,6 +25,7 @@ python-dotenv
 ## DataScience
 numpy
 scikit-learn
+scikit-image
 joblib
 
 ## Monitoring
