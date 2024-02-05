@@ -21,21 +21,22 @@ class SolveVL:
     @time_it
     async def solve(cls, board_id: int) -> tuple[bool, dict, str]:
         logger.debug(f"Sudoku solver started...")
-        time_start = perf_counter()
 
         board_obj = await CRUDBoard.get_board(board_id)
         if board_obj is None:
             return False, {}, "Can not get board."
 
+        time_start = perf_counter()
+
         steps = await cls.solve_loop(board_obj.data)
 
         time_end = perf_counter()
-        logger.info(f"Solved; {steps = :,}")
         out_data = {
             "steps": f"{steps:,}",
             "solve_time": f"{timedelta(seconds=time_end - time_start)}",
         }
 
+        logger.info(f"Solved; {steps = :,}")
         return True, out_data, ""
 
     @classmethod
