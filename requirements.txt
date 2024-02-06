@@ -96,7 +96,7 @@ msgpack==1.0.7
     # via channels-redis
 networkx==3.2.1
     # via scikit-image
-numpy==1.26.3
+numpy==1.26.4
     # via
     #   -r requirements.in
     #   imageio
@@ -154,7 +154,7 @@ scipy==1.12.0
     # via
     #   scikit-image
     #   scikit-learn
-sentry-sdk==1.40.0
+sentry-sdk==1.40.1
     # via -r requirements.in
 service-identity==24.1.0
     # via twisted

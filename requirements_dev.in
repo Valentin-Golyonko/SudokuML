@@ -6,6 +6,7 @@
 notebook
 matplotlib
 tensorflow
+tensorflow-datasets
 
 ## Tests
 #coverage

@@ -4,10 +4,14 @@
 #
 #    pip-compile --constraint=requirements.txt --output-file=requirements_dev.txt requirements_dev.in
 #
-absl-py==2.1.0
+absl-py==1.4.0
     # via
+    #   array-record
+    #   etils
     #   tensorboard
     #   tensorflow
+    #   tensorflow-datasets
+    #   tensorflow-metadata
 anyio==4.2.0
     # via
     #   httpx
@@ -16,6 +20,8 @@ argon2-cffi==23.1.0
     # via jupyter-server
 argon2-cffi-bindings==21.2.0
     # via argon2-cffi
+array-record==0.5.0
+    # via tensorflow-datasets
 arrow==1.3.0
     # via isoduration
 asttokens==2.4.1
@@ -59,6 +65,7 @@ click==8.1.7
     # via
     #   -c requirements.txt
     #   black
+    #   tensorflow-datasets
 comm==0.2.1
     # via ipykernel
 contourpy==1.2.0
@@ -73,6 +80,13 @@ decorator==5.1.1
     #   ipython
 defusedxml==0.7.1
     # via nbconvert
+dm-tree==0.1.8
+    # via tensorflow-datasets
+etils[array-types,enp,epath,epy,etqdm,etree]==1.6.0
+    # via
+    #   array-record
+    #   etils
+    #   tensorflow-datasets
 executing==2.0.1
     # via
     #   -c requirements.txt
@@ -85,6 +99,8 @@ fonttools==4.47.2
     # via matplotlib
 fqdn==1.5.1
     # via jsonschema
+fsspec==2024.2.0
+    # via etils
 gast==0.5.4
     # via tensorflow
 google-auth==2.27.0
@@ -95,6 +111,8 @@ google-auth-oauthlib==1.2.0
     # via tensorboard
 google-pasta==0.2.0
     # via tensorflow
+googleapis-common-protos==1.62.0
+    # via tensorflow-metadata
 grpcio==1.60.1
     # via
     #   tensorboard
@@ -116,7 +134,9 @@ idna==3.6
     #   httpx
     #   jsonschema
     #   requests
-ipykernel==6.29.0
+importlib-resources==6.1.1
+    # via etils
+ipykernel==6.29.1
     # via jupyterlab
 ipython==8.21.0
     # via
@@ -209,7 +229,7 @@ mypy-extensions==1.0.0
     # via black
 nbclient==0.9.0
     # via nbconvert
-nbconvert==7.14.2
+nbconvert==7.15.0
     # via jupyter-server
 nbformat==5.9.2
     # via
@@ -224,16 +244,18 @@ notebook-shim==0.2.3
     # via
     #   jupyterlab
     #   notebook
-numpy==1.26.3
+numpy==1.26.4
     # via
     #   -c requirements.txt
     #   contourpy
+    #   etils
     #   h5py
     #   matplotlib
     #   ml-dtypes
     #   opt-einsum
     #   tensorboard
     #   tensorflow
+    #   tensorflow-datasets
 oauthlib==3.2.2
     # via requests-oauthlib
 opt-einsum==3.3.0
@@ -273,16 +295,23 @@ platformdirs==4.2.0
     #   jupyter-core
 prometheus-client==0.19.0
     # via jupyter-server
+promise==2.3
+    # via tensorflow-datasets
 prompt-toolkit==3.0.43
     # via
     #   -c requirements.txt
     #   ipython
-protobuf==4.23.4
+protobuf==3.20.3
     # via
+    #   googleapis-common-protos
     #   tensorboard
     #   tensorflow
+    #   tensorflow-datasets
+    #   tensorflow-metadata
 psutil==5.9.8
-    # via ipykernel
+    # via
+    #   ipykernel
+    #   tensorflow-datasets
 ptyprocess==0.7.0
     # via
     #   -c requirements.txt
@@ -337,6 +366,7 @@ requests==2.31.0
     #   jupyterlab-server
     #   requests-oauthlib
     #   tensorboard
+    #   tensorflow-datasets
 requests-oauthlib==1.3.1
     # via google-auth-oauthlib
 rfc3339-validator==0.1.4
@@ -362,6 +392,7 @@ six==1.16.0
     #   astunparse
     #   bleach
     #   google-pasta
+    #   promise
     #   python-dateutil
     #   rfc3339-validator
     #   tensorboard
@@ -382,12 +413,18 @@ tensorboard-data-server==0.7.2
     # via tensorboard
 tensorflow==2.15.0.post1
     # via -r requirements_dev.in
+tensorflow-datasets==4.9.4
+    # via -r requirements_dev.in
 tensorflow-estimator==2.15.0
     # via tensorflow
-tensorflow-io-gcs-filesystem==0.35.0
+tensorflow-io-gcs-filesystem==0.36.0
     # via tensorflow
+tensorflow-metadata==1.14.0
+    # via tensorflow-datasets
 termcolor==2.4.0
-    # via tensorflow
+    # via
+    #   tensorflow
+    #   tensorflow-datasets
 terminado==0.18.0
     # via
     #   jupyter-server
@@ -396,6 +433,8 @@ tinycss2==1.2.1
     # via nbconvert
 tokenize-rt==5.2.0
     # via black
+toml==0.10.2
+    # via tensorflow-datasets
 tornado==6.4
     # via
     #   ipykernel
@@ -404,6 +443,10 @@ tornado==6.4
     #   jupyterlab
     #   notebook
     #   terminado
+tqdm==4.66.1
+    # via
+    #   etils
+    #   tensorflow-datasets
 traitlets==5.14.1
     # via
     #   -c requirements.txt
@@ -424,6 +467,7 @@ types-python-dateutil==2.8.19.20240106
 typing-extensions==4.9.0
     # via
     #   -c requirements.txt
+    #   etils
     #   tensorflow
 uri-template==1.3.0
     # via jsonschema
@@ -448,7 +492,11 @@ werkzeug==3.0.1
 wheel==0.42.0
     # via astunparse
 wrapt==1.14.1
-    # via tensorflow
+    # via
+    #   tensorflow
+    #   tensorflow-datasets
+zipp==3.17.0
+    # via etils
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools
