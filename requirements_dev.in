@@ -6,6 +6,7 @@
 notebook
 matplotlib
 tensorflow
+#tensorflow[and-cuda]
 tensorflow-datasets
 
 ## Tests
@@ -18,4 +19,5 @@ black
 black[jupyter]
 
 ## Other
+#tqdm
 #tblib
