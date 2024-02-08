@@ -136,7 +136,7 @@ idna==3.6
     #   requests
 importlib-resources==6.1.1
     # via etils
-ipykernel==6.29.1
+ipykernel==6.29.2
     # via jupyterlab
 ipython==8.21.0
     # via
@@ -229,7 +229,7 @@ mypy-extensions==1.0.0
     # via black
 nbclient==0.9.0
     # via nbconvert
-nbconvert==7.15.0
+nbconvert==7.16.0
     # via jupyter-server
 nbformat==5.9.2
     # via
@@ -256,6 +256,7 @@ numpy==1.26.4
     #   tensorboard
     #   tensorflow
     #   tensorflow-datasets
+    #   tensorflow-hub
 oauthlib==3.2.2
     # via requests-oauthlib
 opt-einsum==3.3.0
@@ -307,6 +308,7 @@ protobuf==3.20.3
     #   tensorboard
     #   tensorflow
     #   tensorflow-datasets
+    #   tensorflow-hub
     #   tensorflow-metadata
 psutil==5.9.8
     # via
@@ -417,6 +419,8 @@ tensorflow-datasets==4.9.4
     # via -r requirements_dev.in
 tensorflow-estimator==2.15.0
     # via tensorflow
+tensorflow-hub==0.16.1
+    # via -r requirements_dev.in
 tensorflow-io-gcs-filesystem==0.36.0
     # via tensorflow
 tensorflow-metadata==1.14.0
@@ -429,6 +433,8 @@ terminado==0.18.0
     # via
     #   jupyter-server
     #   jupyter-server-terminals
+tf-keras==2.15.0
+    # via tensorflow-hub
 tinycss2==1.2.1
     # via nbconvert
 tokenize-rt==5.2.0

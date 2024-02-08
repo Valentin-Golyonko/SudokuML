@@ -8,6 +8,7 @@ matplotlib
 tensorflow
 #tensorflow[and-cuda]
 tensorflow-datasets
+tensorflow-hub
 
 ## Tests
 #coverage
