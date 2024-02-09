@@ -7,8 +7,8 @@ notebook
 matplotlib
 tensorflow
 #tensorflow[and-cuda]
-tensorflow-datasets
-tensorflow-hub
+#tensorflow-datasets
+#tensorflow-hub
 
 ## Tests
 #coverage
