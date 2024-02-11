@@ -28,19 +28,24 @@ class SolveVL:
 
         time_start = perf_counter()
 
-        steps = await cls.solve_loop(board_obj.data)
+        solved, steps = await cls.solve_loop(board_obj.data)
 
         time_end = perf_counter()
         out_data = {
             "steps": f"{steps:,}",
-            "solve_time": f"{timedelta(seconds=time_end - time_start)}",
+            "solve_time": (
+                f"{timedelta(seconds=time_end - time_start)}"
+                if solved
+                else "No solution found."
+            ),
+            "solved": solved,
         }
 
         logger.info(f"Solved; {steps = :,}")
         return True, out_data, ""
 
     @classmethod
-    async def solve_loop(cls, sudoku_board: list[int]) -> int:
+    async def solve_loop(cls, sudoku_board: list[int]) -> tuple[bool, int]:
         np_board: np.ndarray = np.reshape(a=sudoku_board, newshape=(9, 9))
 
         """
@@ -82,12 +87,16 @@ class SolveVL:
                 else:
                     remaining_values[position] = [i for i in range(10)]
 
+        prev_step_progress = []
+
         """main loop"""
         zeros_count = len([i for i in sudoku_board if i == 0])
         for step in range(zeros_count):
             if np_board.all():
                 """exit if solved == all positions filled."""
-                return step
+                return True, step
+
+            step_progress = []
 
             for line_index, line in enumerate(np_board):
                 for item_index, value in enumerate(line):
@@ -99,9 +108,19 @@ class SolveVL:
                     if value != 0:
                         continue
 
-                    await cls.solver(np_board, line_index, item_index, remaining_values)
+                    is_ok = await cls.solver(
+                        np_board, line_index, item_index, remaining_values
+                    )
+                    if not is_ok:
+                        step_progress.append(False)
 
-        return zeros_count
+            if len(prev_step_progress) == len(step_progress):
+                """no solution found"""
+                return False, step
+
+            prev_step_progress = step_progress[:]
+
+        return False, zeros_count
 
     @classmethod
     async def solver(
@@ -110,7 +129,7 @@ class SolveVL:
         line_index: int,
         item_index: int,
         remaining_values: dict[str, list[int]],
-    ) -> None:
+    ) -> bool:
         """
         sudoku solver.
         modifies np_board in place.
@@ -139,7 +158,7 @@ class SolveVL:
                 value=allowed_value,
                 status=CoreConstants.STATUS_SOLVED,
             )
-            return None
+            return True
 
         neighbor_values = cls.get_neighbor_values(
             np_board, line_index, item_index, remaining_values
@@ -162,7 +181,7 @@ class SolveVL:
                     value=av,
                     status=CoreConstants.STATUS_SOLVED,
                 )
-                return None
+                return True
 
             # av_in_h_cube_2 = av in h_cube_2_values_clean
             # av_in_h_cube_3 = av in h_cube_3_values_clean
@@ -197,7 +216,7 @@ class SolveVL:
             value=0,
             status=CoreConstants.STATUS_ZERO,
         )
-        return None
+        return False
 
     @staticmethod
     def get_cube_values(
