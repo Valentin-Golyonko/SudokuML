@@ -22,3 +22,6 @@ black[jupyter]
 ## Other
 #tqdm
 #tblib
+
+# AI
+google-generativeai

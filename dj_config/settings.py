@@ -164,6 +164,11 @@ LOGGING = {
             "level": APP_LOG_LVL,
             "propagate": True,
         },
+        "help_scripts": {
+            "handlers": ("file", "console"),
+            "level": APP_LOG_LVL,
+            "propagate": True,
+        },
     },
 }
 """<- Logging settings"""

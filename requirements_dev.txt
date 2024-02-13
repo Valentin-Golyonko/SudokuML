@@ -33,7 +33,7 @@ babel==2.14.0
     # via jupyterlab-server
 beautifulsoup4==4.12.3
     # via nbconvert
-black[jupyter]==24.1.1
+black[jupyter]==24.2.0
     # via -r requirements_dev.in
 bleach==6.1.0
     # via nbconvert
@@ -83,18 +83,36 @@ fqdn==1.5.1
     # via jsonschema
 gast==0.5.4
     # via tensorflow
+google-ai-generativelanguage==0.4.0
+    # via google-generativeai
+google-api-core[grpc]==2.17.0
+    # via
+    #   google-ai-generativelanguage
+    #   google-generativeai
 google-auth==2.27.0
     # via
+    #   google-api-core
     #   google-auth-oauthlib
+    #   google-generativeai
     #   tensorboard
 google-auth-oauthlib==1.2.0
     # via tensorboard
+google-generativeai==0.3.2
+    # via -r requirements_dev.in
 google-pasta==0.2.0
     # via tensorflow
+googleapis-common-protos==1.62.0
+    # via
+    #   google-api-core
+    #   grpcio-status
 grpcio==1.60.1
     # via
+    #   google-api-core
+    #   grpcio-status
     #   tensorboard
     #   tensorflow
+grpcio-status==1.60.1
+    # via google-api-core
 h5py==3.10.0
     # via tensorflow
 idna==3.6
@@ -264,8 +282,16 @@ prompt-toolkit==3.0.43
     # via
     #   -c requirements.txt
     #   ipython
+proto-plus==1.23.0
+    # via google-ai-generativelanguage
 protobuf==4.25.2
     # via
+    #   google-ai-generativelanguage
+    #   google-api-core
+    #   google-generativeai
+    #   googleapis-common-protos
+    #   grpcio-status
+    #   proto-plus
     #   tensorboard
     #   tensorflow
 psutil==5.9.8
@@ -321,6 +347,7 @@ referencing==0.33.0
 requests==2.31.0
     # via
     #   -c requirements.txt
+    #   google-api-core
     #   jupyterlab-server
     #   requests-oauthlib
     #   tensorboard
@@ -389,6 +416,8 @@ tornado==6.4
     #   jupyterlab
     #   notebook
     #   terminado
+tqdm==4.66.2
+    # via google-generativeai
 traitlets==5.14.1
     # via
     #   -c requirements.txt
@@ -409,6 +438,7 @@ types-python-dateutil==2.8.19.20240106
 typing-extensions==4.9.0
     # via
     #   -c requirements.txt
+    #   google-generativeai
     #   tensorflow
 uri-template==1.3.0
     # via jsonschema
