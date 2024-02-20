@@ -12,8 +12,8 @@ python manage.py makemigrations && python manage.py migrate
 
 #### Backup INITIAL and TEST DATA:
 ```shell
-python manage.py dumpdata core solver -o db_backup/initial_data.json.xz
-python manage.py dumpdata core solver -o db_backup/test_data.json.xz
+python manage.py dumpdata board.Board -o db_backup/initial_data.json.xz
+python manage.py dumpdata board.Board -o db_backup/test_data.json.xz
 ```
 
 #### requirements
