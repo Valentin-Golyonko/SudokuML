@@ -3,28 +3,31 @@ import logging
 import google.generativeai as genai
 from google.generativeai.types import GenerateContentResponse
 
+from dj_config.settings import environ_values
+
 logger = logging.getLogger(__name__)
 
 
 class Gemini:
     """
-    api_key = ""
+    from help_scripts.gemini.gemini_try import Gemini
+    Gemini().single_input()
 
     from help_scripts.gemini.gemini_try import Gemini
-    Gemini(api_key).single_input()
+    Gemini().chat()
 
     from help_scripts.gemini.gemini_try import Gemini
-    Gemini(api_key).chat()
+    Gemini().list_all_models()
 
     from help_scripts.gemini.gemini_try import Gemini
-    Gemini(api_key).list_all_models()
-
-    from help_scripts.gemini.gemini_try import Gemini
-    Gemini(api_key).single_input_with_config()
+    Gemini().single_input_with_config()
     """
 
-    def __init__(self, google_api_key: str):
-        genai.configure(api_key=google_api_key)
+    def __init__(self):
+
+        gemini_api_key = environ_values.get("GEMINI_API_KEY")
+
+        genai.configure(api_key=gemini_api_key)
 
         generation_config = {
             "temperature": 0.9,

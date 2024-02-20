@@ -1,5 +1,10 @@
 from pathlib import Path
 
+from dotenv import dotenv_values
+
+environ_values = dotenv_values(".env")
+environ_values.update(dotenv_values(".env.local"))
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = "1234567890"
