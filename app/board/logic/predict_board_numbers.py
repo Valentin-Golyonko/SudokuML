@@ -18,7 +18,13 @@ class PredictBoardNumbers:
     """
     from app.board.logic.predict_board_numbers import PredictBoardNumbers
     pbn = PredictBoardNumbers()
-    pbn.process_board(difficulty="easy", board_number=31)
+    pbn.process_board(difficulty="medium", board_number=11)
+
+    for p in range(1, 8):
+        for n in range(1, 5):
+            pbn.process_board(difficulty="medium", board_number=f"{p}{n}")
+    else:
+        print("done")
     """
 
     def __init__(self):
@@ -33,7 +39,7 @@ class PredictBoardNumbers:
         logger.info(f"---init done---")
 
     @time_it
-    def process_board(self, difficulty: str, board_number: int) -> None:
+    def process_board(self, difficulty: str, board_number: str) -> None:
         board_name = f"{difficulty}_{board_number}"
         difficulty_id = BoardConstants.DIFFICULTY_DICT.get(difficulty)
 
@@ -45,6 +51,7 @@ class PredictBoardNumbers:
 
         self.save_board(board_name, difficulty_id, predictions)
 
+        logger.info(f"done; {board_name = }")
         return None
 
     @staticmethod
