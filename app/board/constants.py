@@ -16,4 +16,5 @@ class BoardConstants:
         (DIFFICULTY_HARD, "Hard"),
         (DIFFICULTY_VERY_HARD, "Very hard"),
     )
+    DIFFICULTY_DICT = {i[1].lower().replace(" ", "_"): i[0] for i in DIFFICULTY_CHOICES}
     """<- difficulty"""

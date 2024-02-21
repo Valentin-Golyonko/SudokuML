@@ -8,7 +8,7 @@ import numpy as np
 
 from app.board.crud.crud_board import CRUDBoard
 from app.core.constants import CoreConstants
-from app.core.scripts.utils import time_it
+from app.core.scripts.utils import atime_it
 from app.socket.socket_scripts.consumers import ChatConsumer
 
 logger = logging.getLogger(__name__)
@@ -18,7 +18,7 @@ class SolveVL:
     """"""
 
     @classmethod
-    @time_it
+    @atime_it
     async def solve(cls, board_id: int) -> tuple[bool, dict, str]:
         logger.debug(f"Sudoku solver started...")
 
